@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-nginx-dyplga
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dyplga
+  namespace: my-nginx-dyplga
+  labels:
+    name: nginx-dyplga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nginx-dyplga
+  template:
+    metadata:
+      namespace: my-nginx-dyplga
+      labels:
+        name: nginx-dyplga
+    spec:
+      containers:
+      - name: nginx-dyplga
+        image: nginx
+        ports:
+        - containerPort: 80
+
